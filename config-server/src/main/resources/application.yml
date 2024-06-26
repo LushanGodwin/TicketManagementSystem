@@ -1,1 +1,7 @@
-spring.application.name=config-server
+server:
+  port: 8089
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native
