@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: vehicle-service
+  config:
+    import: "optional:configserver:http://localhost:8089"
+server:
+  port: 8082
