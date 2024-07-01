@@ -54,6 +54,11 @@ public class UserServiceImpl implements UserService {
        userDao.save(mapping.toUserEntity(userDTO));
     }
 
+    @Override
+    public boolean isUserExists(String userId) {
+        return userDao.existsById(userId);
+    }
+
     private String generateUserCode() {
         UserEntity firstByOrderByUserCodeDesc = userDao.findFirstByOrderByUserCodeDesc();
         return (firstByOrderByUserCodeDesc != null)

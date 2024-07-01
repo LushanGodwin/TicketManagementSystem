@@ -4,6 +4,9 @@ import jakarta.ws.rs.NotFoundException;
 import lk.ijse.userservice.dto.UserDTO;
 import lk.ijse.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
+@Slf4j
 public class User {
 
     private final UserService userService;
+    private static final Logger logger = LoggerFactory.getLogger(User.class);
     @GetMapping("/health")
     public String UserCheck(){
         return "Hello I'm User Controller. I'm OK! Have a nice day!";
@@ -74,5 +79,18 @@ public class User {
         }
     }
 
+    @GetMapping("/userExists/{userId}")
+    public ResponseEntity<?> isUserExists(@PathVariable String userId) {
+        logger.info("Checking user existence with ID: {}", userId);
+        try {
+            boolean isUserExists = userService.isUserExists(userId);
+            logger.info("User Exists: {}", isUserExists);
+            return ResponseEntity.ok(isUserExists);
+        } catch (Exception exception) {
+            logger.error("Error checking user existence: ", exception);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Internal server error | Unable to check user existence.\nMore Details\n" + exception);
+        }
+    }
 
 }
