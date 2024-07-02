@@ -59,4 +59,9 @@ public class VehicleServiceImpl implements VehicleService {
         }
         return vehicleDTOs;
     }
+
+    @Override
+    public boolean isVehicleExists(String vehicleId) {
+        return vehicleDao.existsById(vehicleId);
+    }
 }

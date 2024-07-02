@@ -16,4 +16,6 @@ public interface VehicleService {
     List<VehicleDTO> getAllVehicles();
 
     List<VehicleDTO> getVehicleByUserId(String userId);
+
+    boolean isVehicleExists(String vehicleId);
 }

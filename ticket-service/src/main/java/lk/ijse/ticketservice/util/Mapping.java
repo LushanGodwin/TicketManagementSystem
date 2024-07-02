@@ -7,14 +7,15 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 public class Mapping {
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    public TicketDTO toTicketDTO(TicketEntity ticketEntity) {
+    public TicketDTO toTicketDTO(Optional<TicketEntity> ticketEntity) {
         return modelMapper.map(ticketEntity, TicketDTO.class);
     }
 
