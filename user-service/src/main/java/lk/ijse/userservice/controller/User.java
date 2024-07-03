@@ -1,6 +1,7 @@
 package lk.ijse.userservice.controller;
 
 import jakarta.ws.rs.NotFoundException;
+import lk.ijse.userservice.dto.LoginDTO;
 import lk.ijse.userservice.dto.UserDTO;
 import lk.ijse.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,17 @@ public class User {
     @GetMapping("/health")
     public String UserCheck(){
         return "Hello I'm User Controller. I'm OK! Have a nice day!";
+    }
+
+    @GetMapping("/login")public ResponseEntity<String> loginUser(@RequestBody LoginDTO loginDTO){
+       try {
+           userService.login(loginDTO);
+           return ResponseEntity.ok("User logged in successfully.");
+
+       }catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).
+                    body("Login Failed.\nMore Details\n"+exception);
+       }
     }
 
     @ResponseStatus(HttpStatus.CREATED)

@@ -1,5 +1,6 @@
 package lk.ijse.userservice.service;
 
+import lk.ijse.userservice.dto.LoginDTO;
 import lk.ijse.userservice.dto.UserDTO;
 import org.springframework.http.ResponseEntity;
 
@@ -17,4 +18,6 @@ public interface UserService {
     void updateUser(String id, UserDTO userDTO);
 
     boolean isUserExists(String userId);
+
+    void login(LoginDTO loginDTO);
 }

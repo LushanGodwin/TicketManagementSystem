@@ -17,6 +17,7 @@ import java.time.LocalDate;
 public class UserEntity {
     @Id
     private String userCode;
+    private String password;
     private String name;
     private String email;
     private String contact;

@@ -2,6 +2,7 @@ package lk.ijse.userservice.service.impl;
 
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
+import lk.ijse.userservice.dto.LoginDTO;
 import lk.ijse.userservice.dto.UserDTO;
 import lk.ijse.userservice.entity.UserEntity;
 import lk.ijse.userservice.repository.UserDao;
@@ -57,6 +58,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isUserExists(String userId) {
         return userDao.existsById(userId);
+    }
+
+    @Override
+    public void login(LoginDTO loginDTO) {
+        UserEntity userEntity = userDao.getReferenceById(loginDTO.getUserCode());
+        if(userEntity==null){
+           throw new RuntimeException("User not found");
+        }
+        if(!userEntity.getPassword().equals(loginDTO.getPassword())){
+            throw new RuntimeException("Invalid password");
+        }
+
     }
 
     private String generateUserCode() {
