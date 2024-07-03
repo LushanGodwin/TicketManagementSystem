@@ -51,17 +51,10 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public boolean isTicketExists(String ticketId) {
-        if (ticketDao.existsById(ticketId)){
-            TicketDTO ticket = getTicket(ticketId);
-            ticket.setStatus(Status.PAID);
-            updateTicket(ticket);
-            return true;
-        }
-        return false;
+        return ticketDao.existsById(ticketId);
     }
 
     public TicketDTO getTicket(String ticketId) {
-        if (!ticketDao.existsById(ticketId)) throw new NotFoundException("Ticket not Found");
         return mapping.toTicketDTO(ticketDao.findById(ticketId));
     }
 

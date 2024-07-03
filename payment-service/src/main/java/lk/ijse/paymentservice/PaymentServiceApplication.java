@@ -1,4 +1,4 @@
-package lk.ijse.ticketservice;
+package lk.ijse.paymentservice;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
@@ -10,22 +10,20 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class TicketServiceApplication {
-
+public class PaymentServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TicketServiceApplication.class, args);
+        SpringApplication.run(PaymentServiceApplication.class, args);
     }
 
     @Bean
-    ModelMapper modelMapper(){
+    public ModelMapper modelMapper() {
         return new ModelMapper();
     }
 
     @Bean
     @LoadBalanced
-    public RestTemplate restTemplate() {
+    public RestTemplate RestTemplate() {
         return new RestTemplate();
     }
-
 }

@@ -93,12 +93,14 @@ public class Ticket {
         return ResponseEntity.ok(ticketService.getTicketsByVehicleId(vehicleId));
     }
 
-    @GetMapping("/ticketExists/{ticketId}")
-    public ResponseEntity<?> isTicketExists(@PathVariable ("ticketId") String ticketId) {
+    @GetMapping("/ticketExists")
+    public ResponseEntity<?> isTicketExists(@RequestParam String ticketId) {
+        System.out.println(ticketId);
         logger.info("Checking ticket existence with ID: {}", ticketId);
         try {
             boolean isTicketExists = ticketService.isTicketExists(ticketId);
             logger.info("Ticket Exists: {}", isTicketExists);
+            System.out.println(isTicketExists);
             return ResponseEntity.ok(isTicketExists);
         } catch (Exception exception) {
             logger.error("Error checking ticket existence: ", exception);
